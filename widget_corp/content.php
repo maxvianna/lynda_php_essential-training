@@ -5,15 +5,24 @@
 	<tr>
 		<td id="navigation">
 		<?php
-		// 3. Perform database query
-		$result = mysql_query("SELECT * FROM subjects", $connection);
-		if (!$result) {
+
+		$subject_set = mysql_query("SELECT * FROM subjects", $connection);
+		if (!$subject_set) {
 			die("Database query failed: " . mysql_error());
 		}
 
-		// 4. Use returned data
-		while ($row = mysql_fetch_array($result)) {
-			echo $row["menu_name"]." ".$row["position"]."<br />";
+		while ($subject = mysql_fetch_array($subject_set)) {
+			echo "<li>{$subject["menu_name"]}</li>";
+			$page_set = mysql_query("SELECT * FROM pages WHERE subject_id = {$subject["id"]}", $connection);
+			if (!$page_set) {
+				die("Database query failed: " . mysql_error());
+			}
+
+			echo "<ul class=\"pages\">";
+			while ($page = mysql_fetch_array($page_set)) {
+				echo "<li>{$page["menu_name"]}</li>";
+			}
+			echo "</ul>";
 		}
 
 		?>
