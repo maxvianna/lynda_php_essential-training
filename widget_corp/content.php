@@ -4,28 +4,20 @@
 <table id="structure">
 	<tr>
 		<td id="navigation">
-		<?php
-
-		$subject_set = mysql_query("SELECT * FROM subjects", $connection);
-		if (!$subject_set) {
-			die("Database query failed: " . mysql_error());
-		}
-
-		while ($subject = mysql_fetch_array($subject_set)) {
-			echo "<li>{$subject["menu_name"]}</li>";
-			$page_set = mysql_query("SELECT * FROM pages WHERE subject_id = {$subject["id"]}", $connection);
-			if (!$page_set) {
-				die("Database query failed: " . mysql_error());
+			<ul class="subjects">
+			<?php
+			$subject_set = get_all_subjects();
+			while ($subject = mysql_fetch_array($subject_set)) {
+				echo "<li>{$subject["menu_name"]}</li>";
+				$page_set = get_pages_for_subject($subject["id"]);
+				echo "<ul class=\"pages\">";
+				while ($page = mysql_fetch_array($page_set)) {
+					echo "<li>{$page["menu_name"]}</li>";
+				}
+				echo "</ul>";
 			}
-
-			echo "<ul class=\"pages\">";
-			while ($page = mysql_fetch_array($page_set)) {
-				echo "<li>{$page["menu_name"]}</li>";
-			}
-			echo "</ul>";
-		}
-
-		?>
+			?>
+			</ul>
 		</td>
 		<td id="page">
 			<h2>Content Area</h2>
