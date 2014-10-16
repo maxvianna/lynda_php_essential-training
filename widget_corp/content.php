@@ -11,6 +11,7 @@
 		$sel_subj = "";
 		$sel_page = "";
 	}
+	$sel_subject = get_subject_by_id($sel_subj);
 ?>
 <?php include("includes/header.php"); ?>
 <table id="structure">
@@ -39,8 +40,8 @@
 			</ul>
 		</td>
 		<td id="page">
-			<h2>Content Area</h2>
-			<?php echo $sel_subj; ?><br />
+			<h2><?php echo $sel_subject['menu_name']; ?></h2>
+			<br />
 			<?php echo $sel_page; ?><br />
 		</td>
 	</tr>
