@@ -34,8 +34,7 @@
 	$result = mysql_query($query, $connection);
 	if ($result) {
 		// Success!
-		header("Location: content.php");
-		exit;
+		redirect_to("content.php");
 	} else {
 		// Display error message.
 		echo "<p>Subject creation failed.</p>";
