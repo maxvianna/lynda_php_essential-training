@@ -33,12 +33,16 @@
 				$result = mysql_query($query, $connection);
 				if (mysql_affected_rows() == 1) {
 					// Success
+					$message = "The subject was successfully updated.";
 				} else {
 					// Failed
+					$message = "The subject update failed.";
+					$message .= "<br />". mysql_error();
 				}
 				
 			} else {
 				// Errors occurred
+				$message = "There were " . count($errors) . " errors in the form.";
 			}
 			
 			
@@ -55,6 +59,20 @@
 		</td>
 		<td id="page">
 			<h2>Edit Subject: <?php echo $sel_subject['menu_name']; ?></h2>
+			<?php if (!empty($message)) {
+				echo "<p class=\"message\">" . $message . "</p>";
+			} ?>
+			<?php
+			// output a list of the fields that had errors
+			if (!empty($errors)) {
+				echo "<p class=\"errors\">";
+				echo "Please review the following fields:<br />";
+				foreach($errors as $error) {
+					echo " - " . $error . "<br />";
+				}
+				echo "</p>";
+			}
+			?>
 			<form action="edit_subject.php?subj=<?php echo urlencode($sel_subject['id']); ?>" method="post">
 				<p>Subject name: 
 					<input type="text" name="menu_name" value="<?php echo $sel_subject['menu_name']; ?>" id="menu_name" />
