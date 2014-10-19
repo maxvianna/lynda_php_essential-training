@@ -105,7 +105,7 @@
 		while ($subject = mysql_fetch_array($subject_set)) {
 			$output .= "<li";
 			if ($subject["id"] == $sel_subject['id']) { $output .= " class=\"selected\""; }
-			$output .= "><a href=\"content.php?subj=" . urlencode($subject["id"]) . 
+			$output .= "><a href=\"edit_subject.php?subj=" . urlencode($subject["id"]) . 
 				"\">{$subject["menu_name"]}</a></li>";
 			$page_set = get_pages_for_subject($subject["id"]);
 			$output .= "<ul class=\"pages\">";
@@ -120,4 +120,5 @@
 		$output .= "</ul>";
 		return $output;
 	}
+
 ?>
