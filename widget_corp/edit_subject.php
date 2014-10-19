@@ -103,6 +103,8 @@
 					?> /> Yes
 				</p>
 				<input type="submit" name="submit" value="Edit Subject" />
+				&nbsp;&nbsp;
+				<a href="delete_subject.php?subj=<?php echo urlencode($sel_subject['id']); ?>" onclick="return confirm('Are you sure?');">Delete Subject</a>
 			</form>
 			<br />
 			<a href="content.php">Cancel</a>
