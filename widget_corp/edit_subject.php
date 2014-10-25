@@ -9,7 +9,7 @@
 
 			$required_fields = array('menu_name', 'position', 'visible');
 			foreach($required_fields as $fieldname) {
-				if (!isset($_POST[$fieldname]) || empty($_POST[$fieldname])) { 
+				if (!isset($_POST[$fieldname]) || (empty($_POST[$fieldname]) && $_POST[$fieldname] != 0)) { 
 					$errors[] = $fieldname; 
 				}
 			}
