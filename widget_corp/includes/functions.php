@@ -1,5 +1,15 @@
 <?php
 	// This file is the place to store all basic functions
+	
+	function logged_in() {
+		return isset($_SESSION['user_id']);
+	}
+	
+	function confirm_logged_in() {
+		if (!logged_in()) {
+			redirect_to("login.php");
+		}
+	}
 
 	function mysql_prep( $value ) {
 		$magic_quotes_active = get_magic_quotes_gpc();
