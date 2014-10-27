@@ -55,6 +55,9 @@
 		}
 		
 	} else { // Form has not been submitted.
+		if (isset($_GET['logout']) && $_GET['logout'] == 1) {
+			$message = "You are now logged out.";
+		} 
 		$username = "";
 		$password = "";
 	}
